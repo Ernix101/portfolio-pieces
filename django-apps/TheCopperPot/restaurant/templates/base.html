@@ -1,0 +1,33 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base-temp</title>
+
+    {% comment %} ! Error for fonts below Due to lack of Internet will be changed shortly {% endcomment %}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Playwrite+GB+J+Guides:ital@0;1&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="{% static 'copper.css' %}" \>
+    <script src="{% static 'copper.js' %}" defer></script>
+</head>
+<body>
+    <nav>
+        <button class="hamburger" id="hamburger">&#9776;</button>
+        <ul id='nav-menu'>
+            <li><a href="/">Home</a></li>
+            <li><a href="/menu/">Menu</a></li>
+            <li><a href="/about/">About</a></li>
+            <li><a href="/contacts">Contact</a></li>
+        </ul>
+    </nav>
+
+    {% block content %}
+    <!--Where the content goes-->
+    {% endblock content %}
+</body>
+</html>

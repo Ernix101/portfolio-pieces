@@ -1,0 +1,347 @@
+:root {
+/* CSS HEX */
+--olive: #8b793fff;
+--copper: #8c5a2b;
+--alabaster-grey: #d1dcdfff;
+--khaki-beige: #c1a488ff;
+--pale-oak: #cbc0afff;
+--walnut: #6c3e17ff;
+
+/* CSS HSL */
+--olive: hsla(46, 38%, 40%, 1);
+--alabaster-grey: hsla(193, 18%, 85%, 1);
+--khaki-beige: hsla(29, 31%, 65%, 1);
+--pale-oak: hsla(36, 21%, 74%, 1);
+--walnut: hsla(28, 65%, 26%, 1);
+}
+
+html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1, h2, h3 {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+p,li {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+article {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+}
+
+
+ /*! Let's make the main content sit behind the image */
+ main {
+    position: relative;
+    z-index: 2;
+    background: rgb(255, 223, 164);
+    border-radius: 40px 40px 0 0;
+    padding-top: 2rem;
+    margin-top: -40px;
+    border-top: 1mm solid var(--khaki-beige);
+ }
+.other-pages {
+    /* padding-top: 80px;
+    margin-top: -90px; */
+    border-radius: 10px 0 0 0;
+    margin: 0 auto;
+}
+
+/*! Styles for the navigation bar */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    background: var(--alabaster-grey) transparent;
+    transition: background 0.3s ease;
+    padding: 1rem 2rem;
+    border-radius: 0 0 16px 16px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+    gap: 2rem;
+    margin-right: 4rem;
+    padding: 0;
+
+}
+
+nav ul li a:hover {
+    background-color: rgba(12, 6, 2, 0.95);
+    cursor: pointer;
+}
+
+nav ul li a {
+    color: var(--alabaster-grey);
+    text-decoration: none;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-radius: 10px;
+    padding: 20px 20px;
+    transition: background 0.25s ease;
+}
+
+/** Making the nav appear in pages without hero */
+nav.solid {
+    background: rgba(12, 6, 2, 0.9) !important;
+}
+body {
+    padding-top: 80px;
+}
+.hero {
+    margin-top: -80px;
+}
+
+
+/*! Styles for the Hero image */
+/* .hero::before{
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 0;
+} */
+
+/* .hero h1, .hero h3 {
+    position: relative;
+    z-index: 1;
+    color: white;
+    font-size: 2rem;
+} */
+
+.hero {
+    border-radius: 20px 20px 0 0;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    height: 90vh;
+
+    /** center the content inside */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--alabaster-grey);
+    text-align: center;
+}
+
+/* % Removed the styles and headings */
+/* .hero h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    font-family: 'Oswald', sans-serif;
+}
+.hero h3 {
+    font-family: 'Oswald', sans-serif;
+} */
+
+
+
+ /*! Cards for the featured food */
+ .featured {
+    height: 120px;
+    width: 120px;
+    border-radius: 40%;
+ }
+
+
+footer {
+    background-color: var(--olive);
+    border-top: 1mm solid var(--khaki-beige);
+    /* border-radius: 25px 25px 0 0; */
+    padding: 20px 0;
+}
+
+/* ! Menu site styles for the dishes */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    padding: 3rem 2rem;
+    background: var(--copper);
+    border-radius: 16px;
+}
+
+.dish-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+}
+.dish-card:hover {
+    transform: translateY(-6px);
+    cursor: pointer;
+}
+.dish-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 0;
+}
+.dish-info {
+    padding: 1rem 1.2rem;
+}
+.dish-info h2 {
+    font-family: 'Oswald', sans-serif;
+    color: var(--walnut);
+    margin-bottom: 0.5rem;
+}
+.dish-info p{
+    font-size: 0.9rem;
+    color: var(--walnut);
+    line-height: 1.5;
+}
+
+/*! Contact Page styles */
+.contact-wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+.contact-image-side {
+    flex: 1;
+}
+.contact-image-side::before{
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 1;
+    width: 593px;
+    border-radius: 0 20px 20px 0;
+}
+.contact-image-side img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 0 20px 20px 0;
+}
+.contact-form-side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem 3rem;
+    background: var(--alabaster-grey);
+    
+}
+.contact-form-side h1 {
+    font-family: 'Oswald', sans-serif;
+    color: var(--walnut);
+    margin-bottom: 0.5rem;
+}
+.contact-form-side p {
+    color: var(--olive);
+    margin-bottom: 2rem;
+}
+.contact-form-side input,
+.contact-form-side textarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    margin-bottom: 1.2rem;
+    border: 1px solid var(--pale-oak);
+    border-radius: 8px;
+    font-size: 1rem;
+    background: white;
+}
+.contact-form-side label {
+    font-family: 'Oswald', sans-serif;
+    color: var(--walnut);
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+    display: block;
+}
+.contact-form-side input[type="submit"]:hover {
+    background: var(--khaki-beige);
+}
+/** Outside of query, hidden on desktop */
+.hamburger {
+    display: none;
+}
+
+
+/* ! Media Queries */
+@media (max-width: 768px) {
+    /* * main styles to shrink accordingly */
+    .other-pages{
+        position: absolute;
+        inset: 0;
+    }
+    .menu-grid {
+        grid-template-columns: 1fr;
+    }
+    .contact-wrapper {
+        flex-direction: column;
+    }
+    .contact-image-side img {
+        height: 300px;
+    }
+    nav {
+        justify-content: flex-end;
+        padding: 1rem;
+        border-radius: 0;
+    }
+    nav ul {
+        gap: 1rem;
+        font-size: 0.8rem;
+    }
+    .hero{
+        background-position: left center;
+    }
+    main {
+        padding-top: 3rem;
+        border-radius: 20px 20px 0 0;
+    }
+
+    /** Hamburger menu styles */
+    .hamburger {
+        display: block;
+        background: none;
+        border: none;
+        color: var(--alabaster-grey);
+        font-size: 1.8rem;
+        cursor: pointer;
+        margin-left: auto;
+        z-index: 101;
+        padding-right: 1.8rem;
+        position: relative;
+    }
+    
+    #nav-menu {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: rgba(12, 6, 2, 0.95);
+        flex-direction: column;
+        padding: 1rem 0;
+    }
+    #nav-menu li {
+        padding: 1rem 2rem;
+    }
+    #nav-menu li a{
+        width: 100%;
+    }
+    #nav-menu li a:hover {
+        background: rgba(12, 6, 2, 0.99);
+    }
+    #nav-menu.open {
+        display: flex;
+        
+    }
+}

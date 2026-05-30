@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+    <header class="hero" style="background-image: url('{% static 'pics/hero2.png' %}')">
+        {% comment %} <h1> The Copper Pot</h1>
+        <h3>The Copper Pot — Where Nairobi Comes to Unwind and Eat Well</h3>        {% endcomment %}
+    </header>
+    <main>
+        <article>
+            <h1 class='welcome'>Welcome</h1>
+            <p>
+                Welcome to The Copper Pot, a warm and modern Nairobi dining spot built for good conversations, satisfying meals, and memorable evenings. From rich Kenyan flavors to internationally inspired dishes, we serve fresh, carefully prepared food in a relaxed atmosphere that feels both stylish and comfortable. Whether you're meeting friends, having a quiet dinner, or grabbing lunch after work, The Copper Pot brings people together over food worth coming back for.
+            </p>
+            <pre>
+
+            </pre>
+
+            {% comment %} * Our featured dishes {% endcomment %}
+            <h2>Featured Dishes</h2>
+            <div class="menu-grid">
+                <div class="dish-card">
+                    <img src="{% static 'pics/bbq.jpg' %}" alt="Barbecue">
+                    <div class="dish-info">
+                        <h2>Smoky Barbecue Feast</h2>
+                        <p>Slow-grilled over open flames and brushed with our signature house glaze...</p>
+                    </div>
+                </div>
+
+                <div class="dish-card">
+                    <img src="{% static 'pics/beef.jpg' %}" alt="Beef">
+                    <div class="dish-info">
+                        <h2>Signature Beef Experience</h2>
+                        <p>Carefully selected cuts of beef seasoned with fresh herbs...</p>
+                    </div>
+                </div>
+
+                <div class="dish-card">
+                    <img src="{% static 'pics/pasta.jpg' %}" alt="Pasta">
+                    <div class="dish-info">
+                        <h2>Creamy Italian-Inspired Pasta</h2>
+                        <p>Silky sauces, perfectly cooked pasta and fresh ingredients...</p>
+                    </div>
+                </div>
+            </div>
+            <pre>
+                
+            </pre>
+            <h2>A Taste Worth Gathering For</h2>
+            <p>
+                At The Copper Pot, every meal is designed to bring people together. From carefully selected ingredients to thoughtfully
+                prepared dishes, we focus on creating flavors that feel rich, comforting and memorable. Whether you're enjoying a quiet lunch,
+                an evening out with friends or a special celebration, our goal is simple - serve food that makes every visit feel worthwhile.
+            </p>
+            <p>
+                With warm hospitality, modern interiors and a menu inspired by both local and international cuisine, The Copper Pot offers a
+                dining experience that feels effortlessly welcoming in the heart of Nairobi.
+            </p>
+
+        </article>
+    </main>
+
+
+    <footer id="footer">
+       <ul>
+        <h3>Hours available</h3>
+        <li>6:00AM -- 9:00PM</li>
+
+        <h3>Follow Us</h3>
+        <li><a href="copperpot144@gmail.com">copperpot144@gmail.com</a></li>
+        <li><a href="copper.ig.profile">IG: copperPotLife</a></li>
+       </ul>
+    </footer>
+{% endblock content %}

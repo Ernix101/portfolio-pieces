@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Men %u{% endblock title %}
+
+{% block content%}
+
+<main class="other-pages">
+        <h1>Menu Items</h1>
+        <p>Here are some of our best made for you.</p>
+    
+
+    <div class="menu-grid">
+        <div class="dish-card">
+            <img class="featured" src="{% static 'pics/beef.jpg'%}" alt="Beef">
+            <div class="dish-info">
+                <h2>Flame Grilled Beef Fillet</h2>
+                <p>Tender beef fillet grilled to perfection and served with garlic herb potatoes, seasonal vegetables, and our signature pepper sauce.</p>
+            </div>
+        </div>
+
+        <div class="dish-card">
+            <img class="featured" src="{% static 'pics/chicken-curry.jpg' %}" alt="Chicken Curry">
+            <div class="dish-info">
+                <h2>Coconut Chicken Curry</h2>
+                <p>Slow-cooked chicken simmered in a creamy coconut curry sauce with fragrant spices, served alongside steamed rice and fresh coriander.</p>
+            </div>
+        </div>
+
+        <div class="dish-card">
+            <img class="featured" src="{% static 'pics/bbq.jpg'%}" alt="Barbecue">
+            <div class="dish-info">
+                <h2>Nairobi BBQ Platter</h2>
+                <p>A hearty combination of grilled chicken wings, spicy sausages, beef strips, and smoky fries — perfect for sharing.</p>
+            </div>
+        </div>
+
+        <div class="dish-card">
+            <img class="featured" src="{% static 'pics/pasta.jpg' %}" alt=" Pasta">
+            <div class="dish-info">
+                <h2>Creamy Tuscan Pasta</h2>
+                <p>Penne pasta tossed in a rich creamy sauce with mushrooms, spinach, parmesan cheese, and roasted cherry tomatoes.</p>
+            </div>
+        </div>
+
+        <div class="dish-card">
+            <img class="featured" src="{% static 'pics/tilapia.jpg' %}" alt ="Tilapia">
+            <div class="dish-info">
+                <h2>Copper Pot Tilapia Special</h2>
+                <p>Whole tilapia seasoned with coastal spices and pan-fried until crisp, served with ugali or coconut rice and kachumbari</p>
+            </div>
+        </div>
+
+        <div class="dish-card">
+            <img class="featured" src="{% static 'pics/chocolate-caramel.jpg' %}" alt="Choco Caramel">
+            <div class="dish-info">
+                <h2>Chocolate Caramel Delight</h2>
+                <p>A soft chocolate cake layered with warm caramel sauce and vanilla cream for the perfect sweet finish.</p>
+            </div>
+        </div>
+    </div>
+
+</main>
+{% endblock content %}
+
+        

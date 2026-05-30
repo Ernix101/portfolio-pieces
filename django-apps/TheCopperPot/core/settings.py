@@ -123,4 +123,4 @@ STATICFILES_DIRS = [BASE_DIR / 'restaurant' / 'static']
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATIC_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'

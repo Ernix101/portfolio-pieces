@@ -121,3 +121,4 @@ STATICFILES_DIRS = [BASE_DIR / 'patients' / 'static']
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATIC_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+CSRF_TRUSTED_ORIGINS = ['https://thepatientdirectory.up.railway.app/']

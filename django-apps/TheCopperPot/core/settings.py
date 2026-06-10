@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-c(20cd_4^y*^((b(2_9gi348$+(l9rz05hbma)b7_l406&5)y8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://thecopperpot.up.railway.app']
+ALLOWED_HOSTS = ['thecopperpot.up.railway.app']
 
 
 # Application definition

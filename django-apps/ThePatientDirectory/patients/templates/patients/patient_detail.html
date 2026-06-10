@@ -1,0 +1,29 @@
+{% extends "patients/base.html" %}
+{% load static %}
+
+{% block title %}{{ patient.name }}{% endblock %}
+
+{% block content %}
+
+<body class="detail-body">
+    <div class="profile-card">
+        <img class='profile-img' src="{% static 'images/account.svg' %}" alt="Patient image">
+        <h1>{{ patient.name }}</h1>
+
+        <ul class="profile-details">
+            <li><strong>Date of Birth:</strong> {{ patient.date_of_birth }}</li>
+            <li><strong>Contact:</strong> {{ patient.contact }}</li>
+            <li><strong>Blood Type:</strong> {{ patient.blood_type }}</li>
+        </ul>
+        <div class="profile-btns">
+            <a  href="{% url 'patient_list' %}">Back</a>
+            <a  href="{% url 'patient_update' patient.pk %}">Update</a>
+            <a  href="{% url 'patient_delete' patient.pk %}">Delete</a>
+        </div>
+        
+    </div>
+</body>
+   
+    
+    
+{% endblock content %}

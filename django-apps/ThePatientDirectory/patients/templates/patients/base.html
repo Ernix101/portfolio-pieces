@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'directory.css' %}">
+    <title>{% block title %}Patient Directory{% endblock %}</title>
+</head>
+<body>
+    <nav>
+        <a href="{% url 'patient_list' %}">Patient Directory</a>
+    </nav>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>

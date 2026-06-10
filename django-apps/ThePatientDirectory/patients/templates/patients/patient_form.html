@@ -1,0 +1,27 @@
+{% extends "patients/base.html" %}
+{% load static %}
+
+{% block title %}Add Patient{% endblock %}
+
+{% block content %}
+
+    <div class="form-wrapper">
+        <div class="image-side">
+            <img src="{% static 'images/hospital.png' %}" alt="hospital img">
+        </div>
+
+        <div class="form-side">
+            <h1>Add New Patient</h1>
+
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn" type="submit">Save Patient</button>
+            </form>
+
+            <a class="cancel-btn" href="{% url 'patient_list' %}">Cancel</a>
+        </div>
+    </div>
+    
+
+{% endblock content %}

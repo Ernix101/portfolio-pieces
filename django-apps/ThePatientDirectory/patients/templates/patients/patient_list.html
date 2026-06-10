@@ -1,0 +1,37 @@
+{% extends "patients/base.html" %}
+{% load static %}
+
+{% block title %}Patient Directory{% endblock %}
+
+{% block content %}
+    <h1>Welcome</h1>
+    <a href="{% url 'patient_create' %} " class='btn'>Add a New Patient</a>
+
+    <form method="GET" class="search-form">
+        <input type="text" name="q" placeholder="Enter patient to search">
+        <button type="submit">Find</button>
+    </form>
+
+    <ul class="patient-list">
+        {% for patient in patients %}
+            <li class='patient-card'>
+                <a href="{% url 'patient_detail' patient.pk %}">{{ patient.name }}</a>
+                <span>{{ patient.blood_type }}</span>
+            </li>
+        {% empty %}
+            <li>No Patients recorded yet.</li>
+        {% endfor %}
+    </ul>
+
+    <div class="pagination">
+        {% if patients.has_previous %}
+            <a href="?page={{ patients.previous_page_number }}&q={{ query }}">Previous</a>
+        {% endif %}
+
+        <span>Page {{ patients.number }} of {{ patients.paginator.num_pages }}</span>
+
+        {% if patients.has_next %}
+            <a href="?page={{ patients.next_page_number }}&q={{ query }}">Next</a>
+        {% endif %}
+    </div>
+{% endblock content %}

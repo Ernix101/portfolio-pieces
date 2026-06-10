@@ -124,3 +124,4 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATIC_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+CSRF_TRUSTED_ORIGINS = ['https://thecopperpot.up.railway.app']

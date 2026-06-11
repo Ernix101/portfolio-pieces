@@ -122,3 +122,11 @@ STATICFILES_DIRS = [BASE_DIR / 'patients' / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATIC_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 CSRF_TRUSTED_ORIGINS = ['https://thepatientdirectory.up.railway.app']
+
+
+import dj_database_url
+import os
+
+DATABASE_URL = os.environ.get('DATABASE_URL')
+if DATABASE_URL:
+    DATABASES['default'] = dj_database_url.config(default=DATABASE_URL)

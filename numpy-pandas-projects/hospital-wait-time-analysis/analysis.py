@@ -16,12 +16,23 @@ total_minutes = int((end - start).total_seconds() / 60)
 random_minutes = np.random.randint(0, total_minutes, size=500)
 arrival_times = [start + pd.Timedelta(minutes=int(m)) for m in random_minutes]
 
-triage_times = [a + pd.Timedelta(minutes=int(m)) for a, m in zip(arrival_times, np.random.randint(5, 30, size=500))]
-doctor_times = [t + pd.Timedelta(minutes=int(m)) for t, m in zip(triage_times, np.random.randint(20, 120, size=500))]
+triage_times = [a + pd.Timedelta(minutes=int(m)) for a, m  in zip(arrival_times, np.random.randint(5, 30, size=500))]
+doctor_times = [t + pd.Timedelta(minutes=int(m)) for t, m  in zip(triage_times, np.random.randint(20, 120, size=500))]
+
+# * Probabilities to make each department category realistic
+probabilities = [
+    0.28,
+    0.22,
+    0.15,
+    0.12,
+    0.10,
+    0.08,
+    0.05,
+]
 
 df = pd.DataFrame({
     'patient_id': patient_ids,
-    'department': np.random.choice(departments, size=500),
+    'department': np.random.choice(departments, size=500, p=probabilities),
     'arrival_time': arrival_times,
     'triage_time': triage_times,
     'doctor_time': doctor_times,

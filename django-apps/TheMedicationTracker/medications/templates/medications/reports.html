@@ -1,0 +1,89 @@
+{% extends "medications/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="kpi-group-reports">
+    <div class="total-meds kpi-card-r">
+        <p class="kpi-label">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="m668-349 106-107q32-32 49-73t17-86q0-94-65.5-159.5T615-840q-45 0-86 17t-73 49L349-668l319 319ZM345-120q45 0 86-17t73-49l107-106-319-319-106 107q-32 32-49 73t-17 86q0 94 65.5 159.5T345-120Z"/></svg>
+            Medications</p>
+        <p class="kpi-number">{{ total_meds }}</p>
+        <p class="kpi-sub">Active</p>
+    </div>
+
+    <div class="kpi-card-r">
+        <p class="kpi-label">Total Units</p>
+        <p class="kpi-number">{{ total_stock }}</p>
+        <p class="kpi-sub">Across all medications</p>
+    </div>
+
+    <div class="kpi-card-r">
+        <p class="kpi-label">Expiring Soon</p>
+        <p class="kpi-number">{{ expiring_soon }}</p>
+        <p class="kpi-sub">Within next 30 days</p>
+    </div>
+
+    <div class="kpi-card-r">
+        <p class="kpi-label">Expired</p>
+        <p class="kpi-number">{{ expired }}</p>
+        <p class="kpi-sub">Requires Immediate Action</p>
+    </div>
+
+    <div class="kpi-card-r">
+        <p class="kpi-label">Total Patients</p>
+        <p><span class="kpi-number  p-no">{{ total_patients }}</span></p>
+        <p class="kpi-sub">Medicated</p>
+    </div>
+
+
+    <div class="kpi-card-r">
+        <p class="kpi-label">Total Records</p>
+        <p class="kpi-number">{{ total_records }}</p>
+        <p class="kpi-sub">Across all medications</p>
+    </div>
+</div>
+
+
+{% comment %} ! Charts and information {% endcomment %}
+
+<div class="usage-stats">
+    <div class="dosage-overview">
+        <h4>Monthly Dosage Activity</h4>
+        <canvas id="monthlyChart"
+            data-labels="{{ chart_labels }}"
+            data-data="{{ chart_data }}">
+        </canvas>
+    </div>
+    <div class="expiry-breakdown">
+        <h4>Expiry Breakdown</h4>
+        <canvas id="expiryChart"
+            data-labels='["critical", "Warning", "Safe"]'
+            data-data="{{ expiry_data }}">
+        </canvas>
+    </div>
+</div>
+
+<div class="records-table-reports">
+    <h4>Most Used Medications</h4>
+    <div class="most-used-header">
+        <span>Medications</span>
+        <span>Batch NO.</span>
+        <span>Stock</span>
+        <span>Times Prescribed</span>
+    </div>
+    
+    {% for med in most_used %}
+        <div class="most-used-row">
+            <span>{{ med.name }}</span>
+            <span>{{ med.batch_no }}</span>
+            <span>{{ med.stock }}</span>
+            <span>{{ med.record_count }}</span>
+        </div>
+    {% empty %}
+    <p class="empty-msg">No Prescription data yet.</p>
+    {% endfor %}
+        
+</div>
+
+{% endblock content %}

@@ -1,0 +1,28 @@
+{% extends "medications/base.html" %}
+{% load static %}
+
+{% block content %}
+
+    
+    <ul class="patient-list">
+        <a href="{% url 'patient_add' %}" class="btn-save">Add Patient</a>
+        <form method="GET" class="search-form">
+            <input type="text" name="q" placeholder="Enter patient to search">
+            <button type="submit">Find</button>
+        </form>
+        
+        {% for patient in patients %}
+            <li class="patient-card">
+                <a href="{% url 'patient_detail' patient.pk %}">{{ patient.name }}</a>
+                <span>Condition: {{ patient.condition }}</span>
+                <span>Age: {{ patient.age }}</span>
+            </li>
+            
+        {% empty %}
+            <p>No Patients Added Yet</p>
+        {% endfor %}
+            
+    </ul>
+
+
+{% endblock content %}

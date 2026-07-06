@@ -1,0 +1,87 @@
+{% extends "medications/base.html" %}
+{% block content %}
+
+<main class="inventory-page">
+    <div class="inventory-header">
+        <div class='inventory-top'>
+            <h2>
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M440-91v-366L120-642v321q0 22 10.5 40t29.5 29L440-91Zm80 0 280-161q19-11 29.5-29t10.5-40v-321L520-457v366Zm159-550 118-69-277-159q-19-11-40-11t-40 11l-79 45 318 183ZM480-526l119-68-317-184-120 69 318 183Z"/></svg>
+                Inventory</h2>
+            <p class="form-subtitle">Track, manage and monitor all medication stock.</p>
+            
+        </div>
+        <div class="inventory-button-div">
+            <a href="{% url 'medication_add' %}" class="btn-save">+ Add Medication</a>
+        </div>
+           
+    </div>
+
+    <div class="kpi-group">
+        <div class="kpi-card">
+            <p class="kpi-label">Total Units</p>
+            <p class="kpi-number">{{ total_units }}</p>
+            <p class="kpi-sub">Across all medications</p>
+        </div>
+        <div class="kpi-card">
+            <p class="kpi-label">Total Medications</p>
+            <p class="kpi-number">{{ total_meds }}</p>
+            <p class="kpi-sub">Unique medicine types</p>
+        </div>
+        <div class="kpi-card">
+            <p class="kpi-label">Low Stock Items</p>
+            <p class="kpi-number">{{ low_stock }}</p>
+            <p class="kpi-sub">Require attention</p>
+        </div>
+        <div class="kpi-card">
+            <p class="kpi-label">Expiring Soon</p>
+            <p class="kpi-number">{{ expiring_soon }}</p>
+            <p class="kpi-sub">Within next 30 days</p>
+        </div>
+
+    </div>
+
+    <div class="records-table">
+        <div class="records-header">
+            <span>Medication</span>
+            <span>Batch No.</span>
+            <span>Stock</span>
+            <span>Expiry Date</span>
+            <span>Status</span>
+            <span>Actions</span>
+        </div>
+        
+        {% for med in medications %}
+            <div class="records-row">
+                <span>{{ med.name }}</span>
+                <span>{{ med.batch_no }}</span>
+                <span>{{ med.stock }}</span>
+                <span>{{ med.expiry_date }}</span>
+                <span>
+                    
+                    {% if med.expiry_date >= today %}
+                        
+                        {% if med.stock >= 20 %}
+                            <span class="badge active">In Stock</span>
+                        {% else %}
+                        <span class="badge expired">Low Stock</span>
+                        {% endif %}
+                    {% else %}
+                        <span class="badge expired">Expired</span>      
+                    {% endif %}
+                        
+                </span>
+
+                <span class="action-btn-div">
+                    <a href="{% url 'med_update' med.pk %}"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M120-120v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm584-528 56-56-56-56-56 56 56 56Z"/></svg></a>
+                    <a href="{% url 'med_delete' med.pk %}"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm80-160h80v-360h-80v360Zm160 0h80v-360h-80v360Z"/></svg></a>
+                </span>
+            </div>
+            {% empty %}
+            <p class="empty-msg">No Medications in inventory yet.</p>
+        {% endfor %}
+            
+    </div>
+
+
+</main>
+{% endblock content %}

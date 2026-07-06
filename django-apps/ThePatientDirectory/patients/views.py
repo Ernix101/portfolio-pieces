@@ -20,11 +20,14 @@ def patient_list(request):
         'query': query
     })
 
+
+# ! view a patient's DETAILS
 def patient_detail(request, pk):
     patient = get_object_or_404(Patient, pk=pk)
     return render(request, 'patients/patient_detail.html', {'patient': patient})
 
 
+#! CREATE a patient
 def patient_create(request):
     if request.method == 'POST':
         form = PatientForm(request.POST)
@@ -36,7 +39,7 @@ def patient_create(request):
     return render(request, 'patients/patient_form.html', {'form': form})
     
 
-#! How you can update the existing patient
+#! How you can UPDATE the existing patient
 def patient_update(request, pk):
     patient = get_object_or_404(Patient, pk=pk)
     if request.method == 'POST':
@@ -50,7 +53,7 @@ def patient_update(request, pk):
 
 
 
-# ! A way to delete the patient instance created
+# ! A way to DELETE the patient instance created
 def patient_delete(request, pk):
     patient = get_object_or_404(Patient, pk=pk)
     if request.method == 'POST':

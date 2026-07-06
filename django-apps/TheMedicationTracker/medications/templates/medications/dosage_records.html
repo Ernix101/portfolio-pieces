@@ -1,0 +1,80 @@
+{% extends "medications/base.html" %}
+{% block content %}
+
+<main class="dosage-page">
+    <div class="inventory-header">
+        <div class='inventory-top'>
+            <h2>
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="m668-349 106-107q32-32 49-73t17-86q0-94-65.5-159.5T615-840q-45 0-86 17t-73 49L349-668l319 319ZM345-120q45 0 86-17t73-49l107-106-319-319-106 107q-32 32-49 73t-17 86q0 94 65.5 159.5T345-120Z"/></svg>
+                Dosage Records</h2>
+            <p class="form-subtitle">Manage and monitor all dosages.</p>
+            
+        </div>
+       
+    </div>
+
+</main>
+
+
+
+
+
+    <div class="kpi-group">
+        <div class="kpi-card">
+            <p class="kpi-label">Total Records</p>
+            <p class="kpi-number">{{ total_records }}</p>
+            <p class="kpi-sub">Across all medications</p>
+        </div>
+        <div class="kpi-card">
+            <p class="kpi-label">Today's Records</p>
+            <p class="kpi-number">{{ todays_records }}</p>
+            <p class="kpi-sub">Acquired so far</p>
+        </div>
+        <div class="kpi-card">
+            <p class="kpi-label">Patients On Medication</p>
+            <p class="kpi-number">{{ total_patients }}</p>
+            <p class="kpi-sub">On Active Meds</p>
+        </div>
+        <div class="kpi-card">
+            <p class="kpi-label">Unique Medications</p>
+            <p class="kpi-number">{{ unique_meds }}</p>
+            <p class="kpi-sub">In storage</p>
+        </div>
+
+    </div>
+
+
+
+    <div class="records-table push-table">
+        <div class="records-header">
+            <span>Patient</span>
+            <span>Medication</span>
+            <span>Dosage</span>
+            <span>Frequency</span>
+            <span>Date prescribed</span>
+            <span>Status</span>
+        </div>
+        
+        {% for record in records %}
+        <div class="records-row">
+            <span>{{ record.patient.name }}</span>
+            <span>{{ record.medication.name }}</span>
+            <span>{{ record.dosage }}</span>
+            <span>{{ record.frequency }}</span>
+            <span>{{ record.date_prescribed }}</span>
+            <span>
+                {% if record.medication.expiry_date >= today %}
+                    <span class="badge active">Active</span>
+                {% else %}
+                    <span class="badge expired">Expired</span>
+                {% endif %}
+            </span>
+        </div>
+        {% empty %}
+        <p class="empty-msg">No Dosage Records Yet.</p>
+        {% endfor %}
+    </div>
+
+
+
+{% endblock content %}

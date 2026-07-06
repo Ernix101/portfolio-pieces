@@ -1,0 +1,107 @@
+{% extends "medications/base.html" %}
+
+{% block content %}
+
+{% comment %} ! kpis at the top {% endcomment %}
+    <div class="kpi-group">
+        <div class="kpi-card">
+            <p class="kpi-label">
+                <svg class="critical-svg" fill="#000000" width="24px" height="24px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><g><path d="M10,1a9,9,0,1,0,9,9A9,9,0,0,0,10,1Zm0,16.4A7.4,7.4,0,1,1,17.4,10,7.41,7.41,0,0,1,10,17.4ZM13.29,5.29,10,8.59,6.71,5.29,5.29,6.71,8.59,10l-3.3,3.29,1.42,1.42L10,11.41l3.29,3.3,1.42-1.42L11.41,10l3.3-3.29Z"/></g></svg>
+                Critical</p>
+            <p class="kpi-number critical-no">{{ critical_count }}</p>
+            <p class="kpi-sub">Within 7 days</p>
+        </div>
+        <div class="kpi-card">
+            <p class="kpi-label">
+                <svg width="24px" height="24px" viewBox="0 0 22 22" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" id="svg2" version="1.1" inkscape:version="0.92.1 r15371" sodipodi:docname="dark_warning.svg"><defs id="defs4"><linearGradient gradientUnits="userSpaceOnUse" y2="2" x2="16" y1="29.999973" x1="16" id="linearGradient4144" xlink:href="#linearGradient4155" inkscape:collect="always" gradientTransform="matrix(1.66667 0 0 -1.66667 -15.667 1064.696)"/><linearGradient inkscape:collect="always" id="linearGradient4155"><stop style="stop-color:#fcd994;stop-opacity:1" offset="0" id="stop4157"/><stop style="stop-color:#fff6e1;stop-opacity:1" offset="1" id="stop4159"/></linearGradient></defs><g inkscape:label="Capa 1" inkscape:groupmode="layer" id="layer1" transform="translate(0 -1030.362)"><path style="fill:#ffc35a;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="m11 1032.362-10 18h20zm0 2 8 15H3z" id="path839" inkscape:connector-curvature="0" sodipodi:nodetypes="cccccccc"/><path style="fill:#ffc35a;fill-opacity:.94117647;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M10 1046.362h2v2h-2z" id="path844" inkscape:connector-curvature="0"/><path style="fill:#ffc35a;fill-opacity:.94117647;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M10 1045.362h2v-6h-2z" id="path846" inkscape:connector-curvature="0" sodipodi:nodetypes="ccccc"/></g></svg>
+                Warning</p>
+            <p class="kpi-number">{{ warning_count }}</p>
+            <p class="kpi-sub">Within 30 days</p>
+        </div>
+        <div class="kpi-card">
+            <p class="kpi-label">
+                <svg class="safe-svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" stroke="#1C274C" stroke-width="1.5"/><path d="M8.5 12.5L10.5 14.5L15.5 9.5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Safe</p>
+            <p class="kpi-number safe-no">{{ safe_count }}</p>
+            <p class="kpi-sub">Non risk Meds</p>
+        </div>
+        <div class="kpi-card">
+            <p class="kpi-label">
+                <svg class="total-svg" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Z"/></svg>
+                Total Medications</p>
+            <p class="kpi-number total-no">{{ total_meds }}</p>
+            <p class="kpi-sub">Unique</p>
+        </div>
+
+    </div>
+
+
+{% comment %} ! Critical Expirations {% endcomment %}
+    <div class="records-table push-table">
+        <h4 class="critical-heading">Critical Expiry Alerts!</h4>
+        <div class="records-header">
+            <span>Medication</span>
+            <span>Batch No.</span>
+            <span>Stock</span>
+            <span>Expiry Date</span>
+            <span>Days Left</span>
+            <span>Actions</span>
+        </div>
+        
+        {% for med in critical %}
+            <div class="records-row">
+                <span>{{ med.name }}</span>
+                <span>{{ med.batch_no }}</span>
+                <span>{{ med.stock }}</span>
+                <span>{{ med.expiry_date }}</span>
+                <span>{{ med.expiry_date|timeuntil }}</span>
+
+                <span class="action-btn-div">
+                    <a href="{% url 'med_update' med.pk %}"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M120-120v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm584-528 56-56-56-56-56 56 56 56Z"/></svg></a>
+                    <a href="{% url 'med_delete' med.pk %}"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm80-160h80v-360h-80v360Zm160 0h80v-360h-80v360Z"/></svg></a>
+                </span>
+            </div>
+            {% empty %}
+            <p class="empty-msg">No Alerts yet.</p>
+        {% endfor %}
+            
+    </div>
+    <pre>
+
+    </pre>
+
+    {% comment %} ! Upcoming Expirations {% endcomment %}
+    <div class="records-table push-table">
+        <h4 class="upcoming-heading">Upcoming Expiry Alerts</h4>
+        <div class="records-header">
+            <span>Medication</span>
+            <span>Batch No.</span>
+            <span>Stock</span>
+            <span>Expiry Date</span>
+            <span>Days Left</span>
+            <span>Actions</span>
+        </div>
+        
+        {% for med in warning %}
+            <div class="records-row">
+                <span>{{ med.name }}</span>
+                <span>{{ med.batch_no }}</span>
+                <span>{{ med.stock }}</span>
+                <span>{{ med.expiry_date }}</span>
+                <span>{{ med.expiry_date|timeuntil }}</span>
+
+                <span class="action-btn-div">
+                    <a href="{% url 'med_update' med.pk %}"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M120-120v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm584-528 56-56-56-56-56 56 56 56Z"/></svg></a>
+                    <a href="{% url 'med_delete' med.pk %}"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm80-160h80v-360h-80v360Zm160 0h80v-360h-80v360Z"/></svg></a>
+                </span>
+            </div>
+            {% empty %}
+            <p class="empty-msg">No Alerts yet.</p>
+        {% endfor %}
+            
+    </div>
+
+
+
+
+{% endblock content %}

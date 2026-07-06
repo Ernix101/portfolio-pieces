@@ -11,8 +11,8 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 import os
 import dj_database_url
-from dotenv import load_dotenv
-load_dotenv(override=False)
+
+
 
 from pathlib import Path
 
@@ -78,10 +78,13 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 
-DATABASE_URL = os.environ.get('DATABASE_URL')
+
 
 DATABASES = {
-    'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+    'default': dj_database_url.config(
+        env='DATABASE_URL',
+        conn_max_age=600,
+    )
 }
 
 

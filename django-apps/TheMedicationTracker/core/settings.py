@@ -149,5 +149,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'medications', 'static'),
 ]
 
-
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# ! Important CSRF verification for the host platform
+CSRF_TRUSTED_ORIGINS = ['https://medication-tracker.up.railway.app']

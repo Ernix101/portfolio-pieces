@@ -1,0 +1,616 @@
+:root {
+  /* Base surfaces */
+  --bg-page: #F7F7FB;
+  --bg-surface: #FFFFFF;
+  --bg-sidebar: #FFFFFF;
+
+  /* Primary brand */
+  --primary: #6C5CE7;
+  --primary-hover: #5B4BD6;
+  --primary-light: #EDEBFC;   /* for active-state backgrounds, subtle highlights */
+
+  /* Text */
+  --text-primary: #1E1B2E;
+  --text-secondary: #6B7280;
+  --text-muted: #9CA3AF;
+
+  /* Borders / dividers */
+  --border-light: #b9b9b9;
+  --border-default: #aaaaad;
+
+  /* Status colors (for "today at a glance" dots + general status) */
+  --status-blue: #4F86F7;
+  --status-green: #22C55E;
+  --status-purple: #A78BFA;
+  --status-yellow: #F5B93D;
+  --status-red: #F45B69;
+
+  /* Appointment type tints — matches actual TYPE_CHOICES */
+/* Consultation — purple family */
+--appt-consultation-bg: #d6c6ff;
+--appt-consultation-border: #A78BFA;
+--appt-consultation-text: #5B21B6;
+
+/* Follow-up — orange family */
+--appt-followup-bg: #FFE4B8;
+--appt-followup-border: #FBBF24;
+--appt-followup-text: #92400E;
+
+/* Checkup — blue family */
+--appt-checkup-bg: #C7DFFF;
+--appt-checkup-border: #60A5FA;
+--appt-checkup-text: #1E40AF;
+
+/* Referral — red/rose family */
+--appt-referral-bg: #FBCFD8;
+--appt-referral-border: #FB7185;
+--appt-referral-text: #9F1239;
+
+/* Vaccination — green family */
+--appt-vaccination-bg: #C9F2D7;
+--appt-vaccination-border: #4ADE80;
+--appt-vaccination-text: #166534;
+
+/* Procedure — yellow/gold family */
+--appt-procedure-bg: #FDF0B0;
+--appt-procedure-border: #EAB308;
+--appt-procedure-text: #854D0E;
+
+/* Post-procedure — indigo family */
+--appt-postprocedure-bg: #D7D9FA;
+--appt-postprocedure-border: #818CF8;
+--appt-postprocedure-text: #3730A3;
+
+/* radius variables */
+--radius-sm: 6px;
+--radius-md: 10px;
+--radius-lg: 16px;
+
+/* box-shadow variables */
+--shadow-md: 0 6px 20px rgb(141, 141, 141);
+--shadow-lw: 0 6px 10px rgb(141, 141, 141);
+
+/* patient columns for the shared table */
+--patient-columns: minmax(220px, 1.5fr) minmax(160px, 1fr)
+                   minmax(170px, 1fr) minmax(190px, 1fr);
+}
+
+body {
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--bg-page);
+  color: var(--text-primary);
+
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas: 
+  "topbar topbar"
+  "sidebar content";
+}
+.main-content {
+  grid-area: content;
+}
+svg {
+  fill: black;
+}
+.calendar-svg {
+  fill: none;
+}
+
+/* ! Search Bar - STYLES */
+.search-wrapper {
+  position: relative;
+}
+.search-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  padding: 12px;
+  background: var(--bg-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 200;
+  cursor: pointer;
+}
+.search-dropdown.hidden {
+  display: none;
+}
+.search-input {
+  width: 250px;
+  height: 30px;
+  padding: 8px;
+  font-size: 14px;
+  color: #1e293b;
+  background-color: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+}
+.search-input:hover {
+  border-color: #2f4dd1;
+}
+.search-input:focus-within {
+  border: 2px solid #2f4dd1;
+  box-shadow: 0 0 0 4px rgba(123, 58, 237, 0.15);
+}
+
+/* ! Navigation & Pop-up styles */
+.top-bar {
+  grid-area: topbar;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-light);
+  padding: 5px 24px;
+}
+.top-bar a {
+  padding-right: 18px;
+  text-decoration: none;
+  color: black;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.top-bar-title {
+  font-family: cursive;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.menu-bar {
+  margin-left: 1.2rem;
+}
+.menu-bar a{
+  flex-direction: row;
+  justify-content: center;
+  transition: 300ms ease;
+  padding: 0.6rem;
+}
+.menu-bar a.active{
+  padding: 0.6rem;
+  border: 1px solid gray;
+  border-radius: 0.4rem;
+  box-shadow: var(--shadow-md);
+  color: var(--primary-hover);
+}
+.menu-bar a:hover{
+  padding: 0.6rem;
+  border-radius: 0.4rem;
+  box-shadow: 0 8px 30px rgb(141, 141, 141);
+}
+.side-bar {
+  grid-area: sidebar;
+
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin-top: 2.5rem;
+}
+
+.side-bar {
+  padding: 9px;
+  background: rgb(216, 215, 215);
+  border-radius: 9px;
+  max-height: 500px;
+}
+.side-bar a {
+  max-width: 30px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+}
+.side-bar svg {
+  transition: 250ms ease;
+}
+.side-bar a svg:hover {
+  scale: 1.4;
+  /* border: 1px solid var(--border-default); */
+  /* background: var(--primary-light);
+  color: var(--primary); */
+}
+.side-bar a.active {
+  scale: 1.3;
+  border: 1px solid var(--border-default);
+  background: var(--primary-light);
+  color: var(--primary);
+}
+.side-bar a.active svg:hover {
+  scale: 1;
+}
+.side-bar svg .top-bar svg{
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+}
+.anchors {
+  margin-bottom: auto;
+}
+.nav-arrow{
+  text-decoration: none;
+  color: var(--text-secondary);
+  border-radius: var(--radius-sm);
+}
+.nav-arrow svg {
+  scale: 1.1;
+  padding: 0.2rem;
+  transition: 300ms ease;
+}
+.nav-arrow svg:hover {
+  scale: 1.4;
+  background: var(--border-light);
+  border-radius: 50%;
+}
+
+
+
+/* ! Card styles */
+.appointment-card {
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  margin-bottom: 6px;
+  font-size: 0.85rem;
+  border-left: 3px solid transparent;
+  position: absolute;
+}
+.appointment-card:hover{
+  cursor: pointer;
+}
+.appointment-card .appt-time {
+  font-weight: 600;
+  display: block;
+}
+.appointment-card .appt-patient {
+  font-weight: 500;
+}
+.appt-type {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.75rem;
+  margin-top: 4px;
+}
+.visit-type {
+  font-size: 1rem;
+}
+.type-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  display: inline-block;
+}
+.patient-list {
+  
+}
+.list-card {
+  align-items: start;
+  display: grid;
+  grid-template-columns: var(--patient-columns);
+  gap: 20px;
+  padding: 10px;
+  border: 1px solid var(--border-default);
+  border-radius: 10px;
+  box-shadow: var(--shadow-lw);
+  margin-bottom: 12px;
+}
+.patient-page-headers {
+  display: grid;
+  grid-template-columns: var(--patient-columns);
+  gap: 20px;
+}
+.patient-identity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.patient-page-headers > :first-child {
+  padding-left: 36px;
+}
+.last-part {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+
+/*! POP-UP (DRAWER)-- cards */
+.patient-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 340px;
+  height: 100vh;
+  background: var(--bg-surface);
+  box-shadow: var(--shadow-md);
+  padding: 24px;
+  overflow-y: auto;
+  z-index: 100;
+  transform: translateX(100%);
+  transition: transform 250ms ease;
+
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px 0 0 30px;
+  border: 1px solid var(--border-light);
+}
+.patient-drawer .hidden {
+  transform: translateX(100%);
+}
+.patient-drawer:not(.hidden) {
+  transform: translateX(0);
+}
+.drawer-close{
+  transition: 300ms ease;
+}
+.drawer-close:hover{
+  cursor: pointer;
+  scale: 1.4;
+  border-radius: 50%;
+}
+.drawer-main{
+  flex: 1;                 /*  <-- Keeping the main area of the drawer to push any other part down */
+  overflow-y: auto;
+}
+
+.x-container {
+  width: auto;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.profile-area {
+  display: grid;
+  align-items: start;
+  grid-template-columns: auto 1fr auto;
+}
+.profile-svg {
+  padding: 8px;
+  width: 70px;
+  height: 70px;
+  fill: gray;
+}
+.mid-area {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.mid-area ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 15px;
+  margin: 0;
+  border: 1px solid var(--border-light);
+  width: 100%;
+  border-radius: 10px;
+}
+.mid-area ul li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.mid-area ul li svg {
+  fill: rgb(59, 59, 59);
+}
+.status-label {
+  border-radius: var(--radius-sm);
+  padding: 4px 10px;
+  margin-top: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;  
+}
+.bottom-area {
+  background: whitesmoke;
+  margin-bottom: 35px;
+}
+.check-in-btn {
+  border: none;
+  background: linear-gradient(to bottom, #514994, #322b68);
+  color: white;
+  padding: 8px;
+  border-radius: 7px;
+  width: 100%;
+  transition: 250ms ease;
+  margin-bottom: 10px;
+}
+.check-in-btn:hover{
+  cursor: pointer;
+  scale: 1.07;
+  background: linear-gradient(to bottom, #6C5CE7, #4c4394);
+}
+.bottom-area-pair-btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  width: 100%;
+}
+.bottom-area-pair-btns button {
+  flex: 1;
+  width: 100%;
+}
+.reschedule-btn {
+  border: none;
+  background: var(--appt-consultation-bg);
+  color: var(--appt-consultation-text);
+  padding: 10px 40px;
+  border: 1px solid var(--appt-consultation-border);
+  border-radius: 7px;
+  transition: 150ms ease;
+}
+.reschedule-btn:hover{
+  cursor: pointer;
+  scale: 1.1;
+  border: 1.5px solid rgb(105, 4, 105);
+  color: purple;
+}
+.cancel-btn {
+  border: none;
+  background: var(--appt-referral-bg);
+  color: var(--appt-referral-text);
+  padding: 10px 40px;
+  border: 1px solid var(--appt-referral-border);
+  border-radius: 7px;
+  transition: 150ms ease; 
+}
+.cancel-btn:hover{
+  cursor: pointer;
+  scale: 1.1;
+  border: 1.5px solid rgb(126, 5, 5);
+  color: red;
+}
+
+
+
+/* ! Varying visit-type classes by django so ignore errors */
+.appt-consultation {
+  background: var(--appt-consultation-bg);
+  color: var(--appt-consultation-text);
+  border-left-color: var(--appt-consultation-border);
+}
+.appt-follow_up {
+  background: var(--appt-followup-bg);
+  color: var(--appt-followup-text);
+  border-left-color: var(--appt-followup-border);
+}
+.appt-checkup {
+  background: var(--appt-checkup-bg);
+  color: var(--appt-checkup-text);
+  border-left-color: var(--appt-checkup-border);
+}
+.appt-referral {
+  background: var(--appt-referral-bg);
+  color: var(--appt-referral-text);
+  border-left-color: var(--appt-referral-border);
+}
+.appt-vaccination {
+  background: var(--appt-vaccination-bg);
+  color: var(--appt-vaccination-text);
+  border-left-color: var(--appt-vaccination-border);
+}
+.appt-procedure {
+  background: var(--appt-procedure-bg);
+  color: var(--appt-procedure-text);
+  border-left-color: var(--appt-procedure-border);
+}
+.appt-post_procedure {
+  background: var(--appt-postprocedure-bg);
+  color: var(--appt-postprocedure-text);
+  border-left-color: var(--appt-postprocedure-border);
+}
+
+/* ! stats labels for the drawer (using Varying classes by django so ignore errors) */
+.status-completed {
+  background: var(--status-green);
+  color: white;
+}
+.status-scheduled {
+  background: var(--status-blue);
+  color: white;
+}
+.status-checked_in {
+  background: var(--status-green);
+  color: black;
+}
+.status-canceled {
+  background: var(--status-red);
+  color: white;
+}
+.status-no_show {
+  background: var(--status-yellow);
+  color: var(--text-primary);
+}
+
+
+/* ! Grid layout for calendar page */
+.calendar-grid {
+  display: grid;
+  grid-template-columns:60px repeat(7, 1fr);
+  gap: 12px;
+  padding: 16px;
+  max-height: 600px;
+  overflow-y: auto;  
+}
+
+.today-banner {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-primary);
+  font-weight: 600;
+  padding-top: 10px;
+}
+.day-column {
+  background: var(--bg-surface);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+  border-right: 1px solid var(--border-light);
+  padding: 12px;
+  padding-top: 0;
+  min-height: 400px;
+  position: relative;
+}
+.day-column:last-child {
+  border-right: none;
+}
+
+.day-column h3 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+  text-align: center;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+/*? Time scales styles */
+.time-scale {
+  width: 60px;
+  flex-shrink: 0;
+}
+.time-scale-spacer {
+  height: 64px;
+}
+.hour-label {
+  height: 90px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  padding-top: 4px;
+  text-align: right;
+  padding-right: 8px;
+}
+
+/*? Scrollable grid for the calendar */
+
+.calendar-nav,
+.day-column {
+  position: sticky;
+  top: 0;
+  background: var(--bg-surface);
+  z-index: 10;
+}

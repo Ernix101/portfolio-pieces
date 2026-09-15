@@ -1,0 +1,65 @@
+{% extends "appointments/base.html" %}
+{% load static %}
+
+{% block content %}
+
+
+<div class="today-banner">
+    {% if is_current_week %}
+        {{ today_display|date:"l, F j, Y" }}
+    {% else %}
+        {{ start_of_week|date:"F j" }} &rarr; {{ end_of_week|date:"F j, Y" }}
+    {% endif %}
+    <pre>  </pre>
+    <div class="calendar-nav">
+
+        <a href="?week={{ prev_week|date:'Y-m-d' }}" class="nav-arrow"> 
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#020202"><path d="M400-240 160-480l240-240 56 58-142 142h486v80H314l142 142-56 58Z"/></svg>
+        </a>
+        <a href="?week={{ next_week|date:'Y-m-d' }}" class="nav-arrow"> 
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#030303"><path d="m560-240-56-58 142-142H160v-80h486L504-662l56-58 240 240-240 240Z"/></svg>
+        </a>
+    </div>
+         
+</div>
+<div class="calendar-grid">
+    <div class="time-scale">
+        <div class="time-scale-spacer"></div>
+        {% for hour in hours %}
+            <div class="hour-label">{{ hour }}</div>
+        {% endfor %}
+    </div>
+
+    {% for day, day_appointments in schedule %}
+    <div class="day-column">
+        <h3>
+            {{ day|date:"D" }}<br>
+            <span class="day-number">{{ day|date:"d" }}</span>
+        </h3>
+        {% for appt in day_appointments %}
+            <div class="appointment-card appt-{{ appt.appointment_type }}"
+                data-patient-name="{{ appt.patient.name }}"
+                data-patient-age="{{ appt.patient.age }}"
+                data-provider-name="{{ appt.provider.name }}"      {% comment %}* <-- information js should grab when the pill is clicked {% endcomment %}
+                data-time="{{ appt.start_time|time:'H:i' }}"
+                data-duration="{{ appt.duration_minutes }}"
+                data-patient-condition="{{ appt.patient.condition }}"
+                data-type="{{ appt.get_appointment_type_display }}"
+                data-status="{{ appt.get_status_display }}"
+                data-status-raw="{{ appt.status }}"
+                data-appointment-id="{{ appt.pk }}"
+                style="top: {{ appt.top_position }}px;">
+
+                <span class="appt-time">{{ appt.start_time|time:"H:i" }}</span>
+                <span class="appt-patient">{{ appt.patient.name }}</span>
+                <span class="appt-type">
+                    <span class="type-dot"></span>{{ appt.get_appointment_type_display }}
+                </span>
+            </div>
+        {% endfor %}    
+    </div>
+{% endfor %}
+</div>
+
+
+{% endblock content %}

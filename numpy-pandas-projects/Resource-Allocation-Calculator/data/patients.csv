@@ -1,0 +1,6 @@
+department, patient_count
+general_ward, 120
+icu, 18
+maternity, 35
+emergency, 50
+opd, 200

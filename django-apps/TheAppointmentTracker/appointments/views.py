@@ -85,7 +85,7 @@ def calendar_view(request):
         'schedule': schedule,
         'stats': stats,
     }
-    return render(request, 'appointments/calendar.html', context, stats)
+    return render(request, 'appointments/calendar.html', context)
 
 
 
@@ -104,6 +104,10 @@ def patients_view(request):
             start_time__lt=timezone.now()
         ).order_by('-start_time').first()
 
+        patient.current_visit = appointments.filter(
+            start_time__exact=timezone.now()
+        )
+
         patient.upcoming_visit = appointments.filter(
             start_time__gte=timezone.now()
         ).order_by('start_time').first()
@@ -115,12 +119,17 @@ def patients_view(request):
     this_months_patients = patients.filter(
         created_at__date__gte=start_of_month,
     )
+    inactive_patients = patients.exclude(
+        appointment__start_time__gte=now,
+        appointment__status='scheduled',
+    ).distinct()
 
 
     context = {
         'patients' : patients,
         'active_patients_total' : active_patients.count(),
-        'new_this_month' : this_months_patients.count(),
+        'inactive_patients_total' : inactive_patients.count(),
+        'this_months_patients_total' : this_months_patients.count(),
         'total_patients': patients.count(),
         'active_page': 'patients',
         }

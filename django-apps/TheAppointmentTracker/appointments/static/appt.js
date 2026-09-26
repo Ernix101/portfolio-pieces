@@ -5,6 +5,12 @@ const searchInput = document.querySelector('.search-input');
 const dropdown = document.querySelector('.search-dropdown');
 
 
+// patient page js
+const patientDetailsDrawer = document.querySelector('.patient-details-drawer');
+const listCards = document.querySelectorAll('.list-card');
+const patientDrawerClose = document.querySelector('.patient-details-drawer-close');
+
+
 // ----------------------------------The data used in drawer pulled by js and returned as text content-----------------------
 cards.forEach(card => {
     card.addEventListener('click', () => {
@@ -27,11 +33,40 @@ cards.forEach(card => {
     });
 });
 
-//* The cancel button in the drawer
+
+
+listCards.forEach(listCard => {
+    listCard.addEventListener('click', () => {
+        patientDetailsDrawer.querySelector('.patient-name').textContent = listCard.dataset.patientName;
+        patientDetailsDrawer.querySelector('.patient-age').textContent = listCard.dataset.patientAge;
+        patientDetailsDrawer.querySelector('.patient-condition').textContent = listCard.dataset.patientCondition;
+        patientDetailsDrawer.querySelector('.provider-name').textContent = listCard.dataset.providerName;
+        patientDetailsDrawer.querySelector('.appt-time').textContent = listCard.dataset.time;
+        patientDetailsDrawer.querySelector('.appt-duration').textContent = listCard.dataset.duration;
+        patientDetailsDrawer.querySelector('.appt-status').textContent = listCard.dataset.status;
+        patientDetailsDrawer.querySelector('.status-label').className = 'status-label status-' + listCard.dataset.statusRaw;
+        patientDetailsDrawer.querySelector('.appt-type').textContent = listCard.dataset.type;
+
+        // const checkinForm = patientDetailsDrawer.querySelector('.checkin-form');
+        // checkinForm.action = `/appointments/${listCard.dataset.appointmentId}/status/checked_in/`;
+        // const cancelForm = patientDetailsDrawer.querySelector('.cancel-form');
+        // cancelForm.action = `/appointments/${listCard.dataset.appointmentId}/status/canceled/`;
+
+        patientDetailsDrawer.classList.toggle('hidden');
+    });
+});
+
+
+//* The close button in the calendar and patient drawers respectively (closes the drawer when clicked)
 drawerClose.addEventListener('click', () => {
     drawer.classList.add('hidden');
 });
 
+if (patientDrawerClose) {
+    patientDrawerClose.addEventListener('click', () => {
+        patientDetailsDrawer.classList.add('hidden');
+    });
+}
 
 // --------------------------------------Searching function for finding appointment (fetch in the dropdown)------------------------------------------
 // * Testing the fetch function works in the console
@@ -84,6 +119,7 @@ searchInput.addEventListener('input', () => {
                     drawer.querySelector('.appt-time').textContent = item.dataset.time;
                     drawer.querySelector('.appt-duration').textContent = item.dataset.duration;
                     drawer.querySelector('.appt-status').textContent = item.dataset.status;
+                    drawer.querySelector('.status-label').className = 'status-label status-' + item.dataset.status;
                     drawer.querySelector('.appt-type').textContent = item.dataset.type;
                     
                     
@@ -132,6 +168,6 @@ document.addEventListener('click', (event) => {
     }
     
     if (!clickedInsideDrawer && !clickedOnAPill && !clickedOnDropdownItem) {
-        drawer.classList.add('.hidden');
+        drawer.classList.add('hidden');
     }
 });

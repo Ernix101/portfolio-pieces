@@ -433,6 +433,19 @@ svg {
   flex-direction: row;
   gap: 1rem;
 }
+.tab-button {
+  background: var(--bg-surface);
+  border: none;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: 250ms ease;
+}
+.tab-button:active {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
 .drawer-body {
   display: flex;
   flex-direction: column;

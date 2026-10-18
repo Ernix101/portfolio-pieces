@@ -404,6 +404,7 @@ svg {
   box-shadow: var(--shadow-md);
   padding: 24px;
   overflow-y: auto;
+  overflow-x: clip;
   z-index: 100;
   transform: translateX(100%);
   transition: transform 250ms ease;
@@ -449,6 +450,7 @@ svg {
 .drawer-body {
   display: flex;
   flex-direction: column;
+  min-height: 0;
   overflow-y: auto;
   flex: 1;
 }

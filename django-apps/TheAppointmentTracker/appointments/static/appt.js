@@ -39,6 +39,7 @@ listCards.forEach(listCard => {
     listCard.addEventListener('click', () => {
         patientDetailsDrawer.querySelector('.patient-name').textContent = listCard.dataset.patientName;
         patientDetailsDrawer.querySelector('.patient-age').textContent = listCard.dataset.patientAge;
+        patientDetailsDrawer.querySelector('.patient-sex').textContent = listCard.dataset.patientSex;
         patientDetailsDrawer.querySelector('.patient-condition').textContent = listCard.dataset.patientCondition;
         patientDetailsDrawer.querySelector('.provider-name').textContent = listCard.dataset.providerName;
         patientDetailsDrawer.querySelector('.appt-time').textContent = listCard.dataset.time;
@@ -55,6 +56,8 @@ listCards.forEach(listCard => {
         patientDetailsDrawer.classList.toggle('hidden');
     });
 });
+
+
 
 
 //* The close button in the calendar and patient drawers respectively (closes the drawer when clicked)

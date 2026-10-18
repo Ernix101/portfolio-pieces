@@ -136,6 +136,8 @@ def patients_view(request):
     return render(request, 'appointments/patients.html', context)
 
 
+
+
 # ! PROVIDERS PAGE VIEW
 def providers_view(request):
     context = {

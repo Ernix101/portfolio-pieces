@@ -35,29 +35,35 @@ cards.forEach(card => {
 
 
 
+
 listCards.forEach(listCard => {
     listCard.addEventListener('click', () => {
-        patientDetailsDrawer.querySelector('.patient-name').textContent = listCard.dataset.patientName;
-        patientDetailsDrawer.querySelector('.patient-age').textContent = listCard.dataset.patientAge;
-        patientDetailsDrawer.querySelector('.patient-sex').textContent = listCard.dataset.patientSex;
-        patientDetailsDrawer.querySelector('.patient-condition').textContent = listCard.dataset.patientCondition;
-        patientDetailsDrawer.querySelector('.provider-name').textContent = listCard.dataset.providerName;
-        patientDetailsDrawer.querySelector('.appt-time').textContent = listCard.dataset.time;
-        patientDetailsDrawer.querySelector('.appt-duration').textContent = listCard.dataset.duration;
-        patientDetailsDrawer.querySelector('.appt-status').textContent = listCard.dataset.status;
-        patientDetailsDrawer.querySelector('.status-label').className = 'status-label status-' + listCard.dataset.statusRaw;
-        patientDetailsDrawer.querySelector('.appt-type').textContent = listCard.dataset.type;
+        const hasUpcoming = listCard.dataset.hasUpcoming === 'true';
 
-        // const checkinForm = patientDetailsDrawer.querySelector('.checkin-form');
-        // checkinForm.action = `/appointments/${listCard.dataset.appointmentId}/status/checked_in/`;
-        // const cancelForm = patientDetailsDrawer.querySelector('.cancel-form');
-        // cancelForm.action = `/appointments/${listCard.dataset.appointmentId}/status/canceled/`;
+        if (hasUpcoming) {
+            patientDetailsDrawer.querySelector('.patient-name').textContent = listCard.dataset.patientName;
+            patientDetailsDrawer.querySelector('.patient-age').textContent = listCard.dataset.patientAge;
+            patientDetailsDrawer.querySelector('.patient-sex').textContent = listCard.dataset.patientSex;
+            patientDetailsDrawer.querySelector('.patient-condition').textContent = listCard.dataset.patientCondition;
+            patientDetailsDrawer.querySelector('.provider-name').textContent = listCard.dataset.providerName;
+            patientDetailsDrawer.querySelector('.appt-time').textContent = listCard.dataset.time;
+            patientDetailsDrawer.querySelector('.appt-duration').textContent = listCard.dataset.duration;
+            patientDetailsDrawer.querySelector('.appt-status').textContent = listCard.dataset.status;
+            patientDetailsDrawer.querySelector('.status-label').className = 'status-label status-' + listCard.dataset.statusRaw;
+            patientDetailsDrawer.querySelector('.appt-type').textContent = listCard.dataset.type;
 
-        patientDetailsDrawer.classList.toggle('hidden');
+            // const checkinForm = patientDetailsDrawer.querySelector('.checkin-form');
+            // checkinForm.action = `/appointments/${listCard.dataset.appointmentId}/status/checked_in/`;
+            // const cancelForm = patientDetailsDrawer.querySelector('.cancel-form');
+            // cancelForm.action = `/appointments/${listCard.dataset.appointmentId}/status/canceled/`;
+
+            patientDetailsDrawer.classList.toggle('hidden');
+        } else {
+            patientDetailsDrawer.querySelector('.next-appointment-section').innerHTML = '<p>No upcoming appointments</p>';
+            patientDetailsDrawer.classList.toggle('hidden');
+        }
+        });
     });
-});
-
-
 
 
 //* The close button in the calendar and patient drawers respectively (closes the drawer when clicked)
